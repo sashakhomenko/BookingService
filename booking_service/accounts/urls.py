@@ -1,10 +1,15 @@
-from django.urls import include, path
-from rest_framework.routers import DefaultRouter
+from django.urls import path, include
+from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import UserProfileDetailView, UserProfileListCreateView
+from .views import LoginAPIView, RegistrationAPIView, LogoutAPIView, UserAPIView
 
 
 urlpatterns = [
-    path('profiles/', UserProfileListCreateView.as_view(), name='profiles'),
-    path('profile/<int:pk>/', UserProfileDetailView.as_view(), name='profile'),
+    path("register/", RegistrationAPIView.as_view(), name="create-user"),
+    path("login/", LoginAPIView.as_view(), name="login-user"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token-refresh"),
+    path("logout/", LogoutAPIView.as_view(), name="logout-user"),
+    path("profile/", UserAPIView.as_view(), name="user-info"),
+
+    path('social/', include('rest_framework_social_oauth2.urls')),
 ]
