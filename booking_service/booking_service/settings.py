@@ -5,8 +5,9 @@ from dotenv import load_dotenv, find_dotenv
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 load_dotenv(find_dotenv())
+
+
 SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = True
@@ -162,7 +163,7 @@ SIMPLE_JWT = {
 # Social authentication settings
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '656316266166-ldht2fe50iui8i683bsbg3q5o7a7kiot.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET']
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.email',
