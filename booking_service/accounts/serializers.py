@@ -1,6 +1,4 @@
-from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .models import CustomUser
 
@@ -8,7 +6,7 @@ from .models import CustomUser
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'email', 'phone',)
+        fields = ('id', 'email', 'phone', 'avatar')
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -25,6 +23,7 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(required=False)
     phone = serializers.CharField(required=False)
     password = serializers.CharField()
+    password2 = serializers.CharField()
 
     def validate(self, attrs):
         email = attrs.get('email')
