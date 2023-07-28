@@ -65,12 +65,14 @@ WSGI_APPLICATION = 'booking_service.wsgi.application'
 
 # Database
 
+DATABASE_PASSWORD = os.environ['DATABASE_PASSWORD']
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bookingservice_db',
+        'NAME': 'bookserv_db.sql',
         'USER': 'postgres',
-        'PASSWORD': '490pdapiV',
+        'PASSWORD': DATABASE_PASSWORD,
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -126,13 +128,24 @@ REST_FRAMEWORK = {
 
 
 # Authentication
+
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'rest_framework_social_oauth2.backends.DjangoOAuth2',
-    'accounts.backends.AuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
+
+# Email verify settings
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'booking.serv.bot@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+
+# JWT
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
